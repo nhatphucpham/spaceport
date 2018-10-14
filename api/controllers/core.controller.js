@@ -1,5 +1,5 @@
 
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 var CoreController = function (model) {
   this.get_all = function (req, res) {
