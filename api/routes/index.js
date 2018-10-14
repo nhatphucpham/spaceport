@@ -1,6 +1,6 @@
 module.exports = function (app) {
-  let AccountRoutes = require('./account.routes');
-  let UserRoutes = require('./user.routes');
+  var AccountRoutes = require('./account.routes');
+  var UserRoutes = require('./user.routes');
   AccountRoutes(app);
   UserRoutes(app);
 };

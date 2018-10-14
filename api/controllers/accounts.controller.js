@@ -1,6 +1,6 @@
 'use strict';
 
-const CoreController = require('./core.controller'),
+var CoreController = require('./core.controller'),
   util = require('util'),
   mongoose = require('mongoose');
 
