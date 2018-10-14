@@ -1,18 +1,23 @@
 'use strict';
 
-const controller = require('./core.controller'),
-    mongoose = require('mongoose');
+const CoreController = require('./core.controller'),
+  util = require('util'),
+  mongoose = require('mongoose');
 
-var AccountController = controller('Account');
+var AccountController = function () {
+  var Account = mongoose.model('Account');
+  CoreController.call(this, Account);
 
-AccountController.create_a_model = function (req, res) {
-    let Account = mongoose.model('Account');
+  this.create_a_model = function (req, res) {
     var new_model = new Account(req.body);
-    new_model.save(function (err, task) {
-        if (err)
-            res.send(err);
-        res.json(task);
+    new_model.save(function (err, response) {
+      if (err)
+        res.send(err);
+      res.json(response);
     });
-},
+  };
+}
+
+util.inherits(AccountController, CoreController);
 
 module.exports = AccountController;

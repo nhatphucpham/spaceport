@@ -1,9 +1,12 @@
+// define ref
 const express = require('express'),
-    app = express(),
-    port = process.env.PORT || 3000,
-    mongoose = require('mongoose'),
-    Account = require('./api/models/accounts');
-const routes = require('./api/routes/account.routes');
+  app = express(),
+  port = process.env.PORT || 3000,
+  mongoose = require('mongoose'),
+  api = require('./index');
+
+//
+const routes = api.Routes;
 
 const bodyParser = require('body-parser');
 
@@ -17,8 +20,12 @@ app.use(bodyParser.json());
 routes(app);
 
 app.use(function (req, res) {
-    res.status(404).send({ url: req.originalUrl + ' not found' })
+  res.status(404).send({ url: req.originalUrl + ' not found' })
 });
+
+app.on('lisening', function () {
+  console.log('RESTful API server is lisening');
+})
 
 app.listen(port);
 

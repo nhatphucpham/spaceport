@@ -1,39 +1,39 @@
 
 const mongoose = require('mongoose');
 
-module.exports = function (model) {
-    let Model = mongoose.model(model);
-    return {
-        get_all: function (req, res) {
-            Model.find({}, function (err, task) {
-                if (err)
-                    res.send(err);
-                res.json(task);
-            });
-        },
-        get_a_model: function (req, res) {
-            Model.findById(req.params.id, function (err, task) {
-                if (err)
-                    res.send(err);
-                res.json(task);
-            });
-        },
-        update_a_model: function (req, res) {
-            Model.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, function (err, task) {
-                if (err)
-                    res.send(err);
-                res.json(task);
-            });
-        },
-        delete_a_model: function (req, res) {
-            Model.remove({
-                _id: req.params.id
-            }, function (err, task) {
-                if (err)
-                    res.send(err);
-                res.json({ message: 'Task successfully deleted' });
-            });
-        }
-    }
+var CoreController = function (model) {
+  this.get_all = function (req, res) {
+    model.find({}, function (err, response) {
+      if (err)
+        res.send(err);
+      res.json(response);
+    });
+  };
+  this.get_a_model = function (req, res) {
+    model.findById(req.params.id, function (err, response) {
+      if (err)
+        res.send(err);
+      res.json(response);
+    });
+  };
+  this.update_a_model = function (req, res) {
+    model.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, function (err, response) {
+      if (err)
+        res.send(err);
+      res.json(response);
+    });
+  };
+  this.delete_a_model = function (req, res) {
+    model.remove({
+      _id: req.params.id
+    }, function (err, response) {
+      if (err)
+        res.send(err);
+      res.json({ message: 'Task successfully deleted' });
+    });
+  };
+
 }
+
+module.exports = CoreController;
 

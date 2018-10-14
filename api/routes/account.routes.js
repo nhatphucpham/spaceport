@@ -1,8 +1,9 @@
 'use strict';
-module.exports = function(app) {
-  var accountList = require('../controllers/accounts.controller');
 
-  // todoList Routes
+module.exports = function (app) {
+  const AccountController = require('../controllers/accounts.controller');
+  var accountList = new AccountController();
+
   app.route('/accounts')
     .get(accountList.get_all)
     .post(accountList.create_a_model);
